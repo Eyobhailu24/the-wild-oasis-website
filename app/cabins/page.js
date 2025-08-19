@@ -1,3 +1,18 @@
-export default function Page() {
-  return <h1>Cabins Page</h1>;
+import Counter from '../components/Counter';
+
+export default async function Page() {
+  const res = await fetch('https://dummyjson.com/users');
+  const { users } = await res.json();
+
+  return (
+    <div>
+      <h1>Cabins Page</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.firstName}</li>
+        ))}
+      </ul>
+      <Counter users={users} />
+    </div>
+  );
 }
